@@ -1,42 +1,143 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.container {
+ max-width: 570px;
+ display: flex;
+ justify-content: center;
+ align-self: center;
+ flex-direction: column;
+}
+/**** start Header section style ****/
+header {
+    max-height: 144px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+    margin: 30px 0;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+
+
+header h1 {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    color: #F9F4DA;
+    margin-bottom: 10px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+header .title > p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    color: #8E8E8E;
+}
+.game-status {
+    background-color: #10A95B;
+    width: 100%;
+    color: #F9F4DA;
+    border-radius: 4px;
+}
+.game-status > h2 {
+margin: 5px;
+}
+.game-status > p {
+    margin: 5px;
+}
+/**** end Header section style ****/
+
+/**** start Main Components style ****/
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+section.eliminations {
+    max-width: 350px;
+    /* display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    gap: 3px; */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    justify-content: center;
+    align-items: center;
 }
 
-.card {
-  padding: 2em;
+section.eliminations > span {
+    padding: 4.5px 8px;
+    border-radius: 3px;
 }
 
-.read-the-docs {
-  color: #888;
+section.letters {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    margin: 35px 0;
 }
+section.letters > span {
+    background-color: #323232;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    border-bottom: 1px solid #F9F4DA;
+    color: #F9F4DA;
+}
+
+section.board {
+    display: flex;
+    max-width: 450px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+section.board > button {
+    height: 35px;
+    width: 35px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #FCBA29;
+    border: 1px solid #D7D7D7;
+    border-radius: 3px;
+}
+
+section.board > button.correct {
+    background-color: #10A95B
+}
+
+section.board > button.wrong {
+    background-color: #EC5D49
+}
+
+.new-game {
+    background-color: #11B5E5;
+    border: 1px solid #D7D7D7;
+    border-radius: 4px;
+    width: 228px;
+    height: 40px;
+    margin: 30px 0;
+    cursor: pointer;
+    padding: 6px 12px;
+
+}
+
+
+/**** end Main Components style ****/
+
+/**** start Footer Components style ****/
+/**** end Footer Components style ****/
