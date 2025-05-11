@@ -33,17 +33,23 @@ header .title > p {
     line-height: 100%;
     color: #8E8E8E;
 }
+
 .game-status {
-    background-color: #10A95B;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 60px;
     color: #F9F4DA;
     border-radius: 4px;
 }
-.game-status > h2 {
-margin: 5px;
+
+.game-status.won {
+    background-color: #10A95B;
 }
-.game-status > p {
-    margin: 5px;
+
+.game-status.lost {
+    background-color: #BA2A2A;
 }
 /**** end Header section style ****/
 
@@ -147,6 +153,7 @@ section.board > button.wrong {
     padding: 6px 12px;
 
 }
+
 
 
 /**** end Main Components style ****/
