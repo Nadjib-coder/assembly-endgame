@@ -1,9 +1,19 @@
 import Header from './components/Header';
 import Footer from './components/Footer';
-import { languages } from './Languages';
+import { languages } from './languages';
 import { useState } from 'react';
 import clsx from 'clsx';
 import './App.css';
+
+/**
+ * Backlog:
+ *
+ * - Farewell messages in status section
+ * - Fix a11y issues
+ * - Make the new game button work
+ * - choose a random word from a list of words
+ * - Confetti drop when the user wins
+ */
 
 function App() {
   // State Vlaues
@@ -80,6 +90,9 @@ function App() {
         isGameWon={isGameWon}
         isGameLost={isGameLost}
         isGameOver={isGameOver}
+        wrongGuessCount={wrongGuessCount}
+        guessedLetters={guessedLetters}
+        currentWord={currentWord}
       />
       <main>
         <section className="eliminations">{eliminations}</section>
