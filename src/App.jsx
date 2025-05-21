@@ -3,21 +3,25 @@ import Footer from './components/Footer';
 import { languages } from './languages';
 import { useState } from 'react';
 import clsx from 'clsx';
+import Confetti from 'react-confetti';
+import { getRandomWord } from './utils';
 import './App.css';
 
 /**
  * Backlog:
  *
- * - Farewell messages in status section
- * - Fix a11y issues
- * - Make the new game button work
- * - choose a random word from a list of words
+ * - Farewell messages in status section ---> Done
+ * - disable the keyboard when the game is over ---> Done
+ * - Fix a11y issues ---> Done
+ * - Make the new game button work ---> Done
+ * - choose a random word from a list of words ---> Done
+ * - reveal what the word wa if th euser lose the game
  * - Confetti drop when the user wins
  */
 
 function App() {
   // State Vlaues
-  const [currentWord, setCurrentWord] = useState('react');
+  const [currentWord, setCurrentWord] = useState(() => getRandomWord());
   const [guessedLetters, setGuessedLetters] = useState([]);
 
   // Derived Values
@@ -25,16 +29,21 @@ function App() {
     (letter) => !currentWord.includes(letter),
   ).length;
 
+  const numGuessesLeft = languages.length - 1;
+
   const isGameWon = currentWord
     .split('')
     .every((letter) => guessedLetters.includes(letter));
 
-  const isGameLost = wrongGuessCount >= languages.length - 1;
+  const isGameLost = wrongGuessCount >= numGuessesLeft;
 
   const isGameOver = isGameWon || isGameLost;
 
+  const lastGuessedLetter = guessedLetters[guessedLetters.length - 1];
+
   // Static Values
   const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+
   const eliminations = languages.map((language, index) => {
     const lost = index < wrongGuessCount ? 'lost' : '';
     const styles = {
@@ -48,13 +57,17 @@ function App() {
     );
   });
 
-  const letterWord = currentWord
-    .split('')
-    .map((letter, index) => (
-      <span key={index}>
-        {guessedLetters.includes(letter) ? letter.toUpperCase() : ''}
+  const letterWord = currentWord.split('').map((letter, index) => {
+    const shouldRevealLetter = isGameLost || guessedLetters.includes(letter);
+    const revealClasssName = clsx(
+      isGameLost && !guessedLetters.includes(letter) && 'reveal',
+    );
+    return (
+      <span key={index} className={revealClasssName}>
+        {shouldRevealLetter ? letter.toUpperCase() : ''}
       </span>
-    ));
+    );
+  });
 
   const keyboardElements = alphabet.map((letter) => {
     const isGuessed = guessedLetters.includes(letter);
@@ -70,6 +83,9 @@ function App() {
         className={className}
         key={letter}
         onClick={() => handleClick(letter)}
+        disabled={isGameOver}
+        aria-disabled={guessedLetters.includes(letter)}
+        aria-label={`Letter ${letter}`}
       >
         {letter.toUpperCase()}
       </button>
@@ -84,8 +100,14 @@ function App() {
     });
   }
 
+  function startNewGame() {
+    setGuessedLetters([]);
+    setCurrentWord(getRandomWord());
+  }
+
   return (
     <>
+      {<Confetti /> && isGameWon}
       <Header
         isGameWon={isGameWon}
         isGameLost={isGameLost}
@@ -93,12 +115,35 @@ function App() {
         wrongGuessCount={wrongGuessCount}
         guessedLetters={guessedLetters}
         currentWord={currentWord}
+        lastGuessedLetter={lastGuessedLetter}
       />
       <main>
         <section className="eliminations">{eliminations}</section>
         <section className="letters">{letterWord}</section>
+        {/* Combined visually-hidden aria-live region for status */}
+        <section className="sr-only" aria-live="polite" role="status">
+          <p>
+            {currentWord.includes(lastGuessedLetter)
+              ? `Correct the letter ${lastGuessedLetter} is in the word`
+              : `Sorry, the letter ${lastGuessedLetter} is not in the word`}
+            You have ${numGuessesLeft} attempts Left
+          </p>
+          <p>
+            Current Word:{' '}
+            {currentWord
+              .split('')
+              .map((letter) =>
+                guessedLetters.includes(letter) ? `${letter}, ` : 'blank, ',
+              )
+              .join('')}
+          </p>
+        </section>
         <section className="board">{keyboardElements}</section>
-        {isGameOver && <button className="new-game">New Game</button>}
+        {isGameOver && (
+          <button className="new-game" onClick={() => startNewGame()}>
+            New Game
+          </button>
+        )}
       </main>
       <Footer />
     </>

@@ -1,22 +1,10 @@
 import clsx from 'clsx';
 import { languages } from '../languages';
-import getFarewellText from '../utils';
-
-/**
- * Chalenge: Bid farewell to each programming language
- * as it gets erased from existance
- *
- * Use the 'getFarewellText' function from the new utils.js
- * filr to generate the text
- *
- */
+import { getFarewellText } from '../utils';
 
 export default function Header(props) {
-  const lastGuessedLetter =
-    props.guessedLetters[props.guessedLetters.length - 1];
-
   const wrongGuessLetter =
-    !props.currentWord.includes(lastGuessedLetter) &&
+    !props.currentWord.includes(props.lastGuessedLetter) &&
     props.guessedLetters.length > 0;
 
   const gameStatusClassName = clsx('game-status', {
@@ -63,7 +51,9 @@ export default function Header(props) {
           from Assembly!
         </p>
       </section>
-      <section className={gameStatusClassName}>{renderGameStatus()}</section>
+      <section aria-live="polite" role="status" className={gameStatusClassName}>
+        {renderGameStatus()}
+      </section>
     </header>
   );
 }
