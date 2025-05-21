@@ -12,18 +12,22 @@ import getFarewellText from '../utils';
  */
 
 export default function Header(props) {
+  const lastGuessedLetter =
+    props.guessedLetters[props.guessedLetters.length - 1];
+
+  const wrongGuessLetter =
+    !props.currentWord.includes(lastGuessedLetter) &&
+    props.guessedLetters.length > 0;
+
   const gameStatusClassName = clsx('game-status', {
     won: props.isGameWon,
     lost: props.isGameLost,
+    wrong: wrongGuessLetter,
   });
 
   function renderGameStatus() {
     if (!props.isGameOver) {
-      const lastGuessedLetter =
-        props.guessedLetters[props.guessedLetters.length - 1];
-      console.log('lastGuessedLetter', lastGuessedLetter);
-      console.log(props.wrongGuessCount);
-      if (!props.currentWord.includes(lastGuessedLetter)) {
+      if (wrongGuessLetter) {
         const wrongLetterStatus = languages.map((language, index) => {
           if (index === props.wrongGuessCount - 1) {
             return getFarewellText(language.name);
@@ -32,10 +36,6 @@ export default function Header(props) {
         return <>{wrongLetterStatus}</>;
       }
     } else {
-      return null;
-    }
-
-    if (props.isGameOver) {
       if (props.isGameWon) {
         return (
           <>

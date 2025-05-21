@@ -43,6 +43,9 @@ header .title > p {
     min-height: 60px;
     color: #F9F4DA;
     border-radius: 4px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
 }
 
 .game-status.won {
@@ -51,6 +54,10 @@ header .title > p {
 
 .game-status.lost {
     background-color: #BA2A2A;
+}
+
+.game-status.wrong {
+    background-color:#7A5EA7;
 }
 /**** end Header section style ****/
 
