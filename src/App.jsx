@@ -7,18 +7,6 @@ import Confetti from 'react-confetti';
 import { getRandomWord } from './utils';
 import './App.css';
 
-/**
- * Backlog:
- *
- * - Farewell messages in status section ---> Done
- * - disable the keyboard when the game is over ---> Done
- * - Fix a11y issues ---> Done
- * - Make the new game button work ---> Done
- * - choose a random word from a list of words ---> Done
- * - reveal what the word wa if th euser lose the game
- * - Confetti drop when the user wins
- */
-
 function App() {
   // State Vlaues
   const [currentWord, setCurrentWord] = useState(() => getRandomWord());
