@@ -187,4 +187,16 @@ section.board > button:disabled {
 /**** end Main Components style ****/
 
 /**** start Footer Components style ****/
+footer {
+    position: relative;
+    bottom: 0;
+    padding: 8px 12px;
+    text-align: center;
+    margin-top: 35px;
+}
+footer p a {
+    text-decoration: none;
+    color: gray;
+    cursor: pointer;
+}
 /**** end Footer Components style ****/

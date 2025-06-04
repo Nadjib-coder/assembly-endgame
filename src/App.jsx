@@ -1,5 +1,5 @@
 import Header from './components/Header';
-// import Footer from './components/Footer';
+import Footer from './components/Footer';
 import { languages } from './languages';
 import { useState } from 'react';
 import clsx from 'clsx';
@@ -133,7 +133,7 @@ function App() {
           </button>
         )}
       </main>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }
