@@ -1,5 +1,5 @@
 import Header from './components/Header';
-import Footer from './components/Footer';
+// import Footer from './components/Footer';
 import { languages } from './languages';
 import { useState } from 'react';
 import clsx from 'clsx';
@@ -95,7 +95,7 @@ function App() {
 
   return (
     <>
-      {<Confetti /> && isGameWon}
+      {isGameWon && <Confetti recycle={false} numberOfPeices={1000} />}
       <Header
         isGameWon={isGameWon}
         isGameLost={isGameLost}
@@ -133,7 +133,7 @@ function App() {
           </button>
         )}
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
